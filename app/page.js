@@ -1,60 +1,39 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import ThemeToggle from "./theme-toggle";
 
 const projects = [
   {
     number: "01",
-    name: "House of the Dragons",
-    type: "Game Development",
-    description: "A game development project that demonstrates programming logic and interactive application concepts.",
-    href: "https://github.com/PTE050305/Flying-bee",
-    tags: ["Java", "Game Development"],
-    image: "/house-of-dragons.jpg",
-  },
-  {
-    number: "02",
-    name: "Online Barbershop Booking System",
-    type: "Web Application",
-    description: "A job order monitoring system developed to organize and manage job order records and processes.",
-    href: "https://github.com/PTE050305/Job_order_management",
-    tags: ["PHP", "MySQL"],
-    image: "/barbershop-booking.jpg",
-  },
-  {
-    number: "03",
     name: "MenuMastermind",
-    type: "Figma-Based Mobile Delivery App",
-    description: "A Figma-based mobile delivery app concept for browsing restaurants, discovering cuisines, and ordering food.",
-    href: "",
-    tags: ["Figma", "UI/UX Design", "Mobile App"],
+    type: "POS & Menu Management",
+    description: "A menu and order management application designed to make restaurant operations more organized.",
+    tags: ["Web Application", "POS"],
     image: "/menumastermind.png",
   },
   {
-    number: "04",
-    name: "Eris Cafe",
-    type: "Web Application",
-    description: "A cafe-focused digital project designed to support a better customer experience.",
-    href: "",
-    tags: ["Web Development"],
-    image: "/eris-cafe.jpeg",
-  },
-  {
-    number: "05",
+    number: "02",
     name: "MediQueue",
     type: "Mobile Application",
     description: "A queue management application concept designed to support more organized health-center services.",
-    href: "https://github.com/PTE050305/MediQueue",
     tags: ["Mobile Development", "Firebase"],
     image: "/mediqueue.png",
   },
   {
-    number: "06",
-    name: "AJR- Inventory Management System",
-    type: "Inventory Management System",
-    description: "An inventory management project designed to organize product records, stock levels, and daily inventory operations.",
-    href: "",
-    tags: ["System Development"],
-    image: "/ajr-ims.jpg",
+    number: "03",
+    name: "Eris Cafe",
+    type: "Cafe Management Dashboard",
+    description: "A management dashboard for monitoring cafe operations, sales, and business records.",
+    tags: ["Dashboard", "Web Application"],
+    image: "/eris-cafe.jpeg",
+  },
+  {
+    number: "04",
+    name: "Other Academic Projects",
+    type: "Academic Work",
+    description: "Additional software projects completed throughout my Information Technology studies.",
+    tags: ["Software Development"],
   },
 ];
 
@@ -139,15 +118,56 @@ const leadership = [
   },
 ];
 
-function SectionHeading({ label }) {
+const certificates = [
+  {
+    title: "CCNA: Switching, Routing, and Wireless Essentials",
+    issuer: "Cisco Networking Academy",
+    image: "/Certificates/CCNA-_Switching-_Routing-_and_Wireless_Essentials_certificate.png",
+  },
+  {
+    title: "TOPCIT Level 2",
+    issuer: "TOPCIT · 2026",
+    image: "/Certificates/TOPCIT_2026.png",
+  },
+  {
+    title: "Mapúa Certificate",
+    issuer: "Mapúa University",
+    image: "/Certificates/Mapua.png",
+  },
+  {
+    title: "UiTM Certificate",
+    issuer: "Universiti Teknologi MARA",
+    image: "/Certificates/UiTM.png",
+  },
+  {
+    title: "Wadhwani Foundation Certificate",
+    issuer: "Wadhwani Foundation",
+    image: "/Certificates/Wadhwani Foundation Cert.png",
+  },
+  {
+    title: "Wadhwani Foundation Certificate",
+    issuer: "Wadhwani Foundation",
+    image: "/Certificates/wadhwani foundation.png",
+  },
+];
+
+function SectionHeading({ eyebrow, title, description }) {
   return (
     <div className="section-heading">
-      <span className="section-label">{label}</span>
+      <span className="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      {description && <p>{description}</p>}
     </div>
   );
 }
 
 export default function Home() {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
   return (
     <main>
       <header className="nav-wrap">
@@ -159,15 +179,20 @@ export default function Home() {
             <a href="#journey">Journey</a>
             <a href="#projects">Projects</a>
             <a href="#achievements">Achievements</a>
-            <ThemeToggle />
+            <a href="#certificates">Certificates</a>
+            <a href="#contact" className="nav-contact">Contact <span>↗</span></a>
+            <button className="theme-toggle" type="button" aria-label="Toggle color theme" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+              {theme === "light" ? "Night" : "Day"}
+            </button>
           </div>
         </nav>
       </header>
 
       <section className="hero container" id="home">
         <div className="hero-copy">
-          <h1>Angelie Marie<br />B. Dinawanao</h1>
+          <h1>Angelie Marie<br /><em>B. Dinawanao</em></h1>
           <p className="hero-kicker">BUKIDNON STATE UNIVERSITY</p>
+          <p className="hero-lead">Ensuring product quality through structured project delivery.</p>
           <div className="hero-actions">
             <a className="button button-dark" href="/Angelie-Dinawanao-Resume.pdf" download>Request Resume <span>↓</span></a>
             <a className="button button-light" href="#contact">Get in Touch <span>↗</span></a>
@@ -177,20 +202,31 @@ export default function Home() {
             <span>BS INFORMATION TECHNOLOGY</span>
           </div>
         </div>
-        <div className="hero-art" aria-label="Profile image">
+        <div className="hero-art" aria-label="Profile image placeholder">
           <div className="portrait-frame">
             <div className="portrait-placeholder">
-              <Image className="profile-photo" src="/profile-new.jpg" alt="Angelie Marie B. Dinawanao" fill priority />
+              <Image className="profile-photo" src="/profile-new.jpg" alt="Angelie Marie Dinawanao" fill priority sizes="(max-width: 800px) 70vw, 28vw" />
             </div>
             <div className="portrait-index">PORTFOLIO / 2026</div>
           </div>
+          <div className="hero-stamp">CURIOUS<br />BY NATURE<span>✳</span></div>
+          <div className="vertical-note">DOCUMENT · TEST · IMPROVE</div>
         </div>
       </section>
 
+      <div className="ticker" aria-hidden="true">
+        <div>DOCUMENTATION <span>✳</span> QUALITY ASSURANCE <span>✳</span> PROJECT COORDINATION <span>✳</span> USER-CENTERED SOLUTIONS <span>✳</span> DOCUMENTATION <span>✳</span></div>
+      </div>
+
       <section className="section container about-section" id="about">
-        <SectionHeading label="01 — About me" />
+        <SectionHeading eyebrow="01 / A LITTLE ABOUT ME" title={<>Technology with<br /><em>purpose.</em></>} />
         <div className="about-content">
-          <p className="about-summary">As an Information Technology student, I have gained hands-on experience in developing applications, games, websites, and mobile systems, strengthening my technical and problem-solving skills. With three years of student leadership experience, I have also developed strong communication, teamwork, organizational, and adaptability skills. My interests include Technical Writing and Documentation, Software Quality Assurance, UI/UX Design, Technical Project Management, and Product Management. I aim to combine my technical knowledge, creativity, and leadership experience to develop reliable, user-centered digital solutions while continuously learning and growing in the IT field.</p>
+          <p className="about-intro">I’m Angelie Marie B. Dinawanao, a Bachelor of Science in Information Technology student at Bukidnon State University.</p>
+          <div className="about-detail">
+            <p>Throughout my academic journey, I have gained hands-on experience in developing various IT solutions, ranging from console-based applications and games to web and mobile systems. These experiences have strengthened my technical skills, problem-solving abilities, and understanding of software development.</p>
+            <p>Beyond technology, I have dedicated three years to student leadership within a student body organization, serving in roles including Technical Officer, Student Representative, and Public Relations Officer. These responsibilities helped me develop communication, collaboration, organizational, and leadership skills.</p>
+            <p>I am particularly interested in Technical Writing and Documentation, Software Quality Assurance, Technical Project Management, and Product Management. I aspire to bridge the gap between technology, people, and processes by contributing to reliable, meaningful, and user-centered digital solutions.</p>
+          </div>
         </div>
         <div className="stats-row">
           <div><strong>04</strong><span>YEARS OF IT STUDIES</span></div>
@@ -201,16 +237,18 @@ export default function Home() {
 
       <section className="section skills-section" id="skills">
         <div className="container">
-          <SectionHeading label="02 — Areas of interest" />
+          <SectionHeading eyebrow="02 / AREAS OF INTEREST" title={<>Where I bring<br /><em>value.</em></>} description="Areas I am interested in pursuing and continuously developing through practical experience." />
           <div className="interest-grid">
             {interests.map(([title, description], index) => (
               <article className="interest-card" key={title}>
                 <span className="card-number">0{index + 1}</span>
                 <div><h3>{title}</h3><p>{description}</p></div>
+                <span className="card-arrow">↗</span>
               </article>
             ))}
           </div>
           <div className="stack-block">
+            <div><span className="eyebrow">TOOLS & TECHNOLOGIES</span><h3>My working toolkit</h3></div>
             <div className="stack-list">
               {["HTML", "CSS", "JavaScript", "C", "Java", "PHP", "Laravel", "MySQL", "GitHub", "Figma", "Microsoft Office"].map((item) => <span key={item}>{item}</span>)}
             </div>
@@ -219,7 +257,7 @@ export default function Home() {
       </section>
 
       <section className="section container journey-section" id="journey">
-        <SectionHeading label="03 — Learning journey" />
+        <SectionHeading eyebrow="03 / LEARNING IN PROGRESS" title={<>My development<br /><em>journey.</em></>} description="A look at how my coursework, projects, and responsibilities have shaped my growth as an IT student." />
         <div className="timeline">
           {journey.map((item, index) => (
             <article className="timeline-item" key={item.year}>
@@ -233,7 +271,8 @@ export default function Home() {
         </div>
         <div className="leadership">
           <div className="leadership-heading">
-            <h3>Leadership</h3>
+            <span className="eyebrow">LEADERSHIP EXPERIENCE</span>
+            <h3>Learning to lead<br />and work together.</h3>
             <p>Three years of involvement in the College of Technologies Student Body Organization (COT-SBO), Bukidnon State University.</p>
           </div>
           <div className="leadership-list">
@@ -249,14 +288,18 @@ export default function Home() {
 
       <section className="section projects-section" id="projects">
         <div className="container">
-          <SectionHeading label="04 - Projects" />
+          <span className="section-label">04 - Projects</span>
           <div className="featured-projects">
-            {projects.filter((project) => project.image || project.images).map((project) => (
-              <div className="featured-project" key={project.name}>
-                <div className={`featured-project-images${project.images ? " multiple" : ""}${project.name === "MenuMastermind" || project.name === "MediQueue" ? " white-preview-frame" : ""}`}>
-                  {(project.images || [project.image]).map((image, index) => (
-                    <Image className={`featured-project-image${project.name === "MediQueue" ? " mobile-preview mediqueue-preview" : ""}${project.name === "MenuMastermind" ? " menumastermind-preview" : ""}`} src={image} alt={`${project.name} preview ${index + 1}`} width={1484} height={768} key={image} />
-                  ))}
+            {projects.filter((project) => project.image).map((project) => (
+              <article className="featured-project" key={project.name}>
+                <div className={`featured-project-images${project.name === "MenuMastermind" || project.name === "MediQueue" ? " white-preview-frame" : ""}`}>
+                  <Image
+                    className={`featured-project-image${project.name === "MediQueue" ? " mediqueue-preview" : ""}${project.name === "MenuMastermind" ? " menumastermind-preview" : ""}`}
+                    src={project.image}
+                    alt={`${project.name} preview`}
+                    width={1484}
+                    height={768}
+                  />
                 </div>
                 <div className="featured-project-info">
                   <span className="project-number">{project.number}</span>
@@ -265,17 +308,7 @@ export default function Home() {
                   <p>{project.description}</p>
                   <div className="project-tags">{project.tags.map((tag) => <small key={tag}>{tag}</small>)}</div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="project-list">
-            {projects.filter((project) => !project.image && !project.images).map((project) => (
-              <div key={project.name}>
-                <div className="project-row">
-                  <span className="project-number">{project.number}</span>
-                  <div className="project-info"><h3>{project.name}</h3><span>{project.type}</span><p>{project.description}</p><div className="project-tags">{project.tags.map((tag) => <small key={tag}>{tag}</small>)}</div></div>
-                </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -283,7 +316,7 @@ export default function Home() {
 
       <section className="section achievements-section" id="achievements">
         <div className="container">
-          <SectionHeading label="05 — Achievements" />
+          <span className="section-label">05 - Achievements</span>
           <div className="achievement-grid">
             <article className="achievement-card"><span className="card-number">01</span><h3>Dean&apos;s Lister</h3><p>Recognized for academic excellence through consistent achievement on the Dean&apos;s List.</p></article>
             <article className="achievement-card"><span className="card-number">02</span><h3>College Honor</h3><p>Received college-level recognition for strong academic performance and commitment to learning.</p></article>
@@ -293,10 +326,46 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section certificates-section" id="certificates">
+        <div className="container">
+          <SectionHeading
+            eyebrow="06 / CREDENTIALS"
+            title={<>Proof of<br /><em>progress.</em></>}
+            description="Certificates and credentials earned through coursework, skills development, and professional learning."
+          />
+          <div className="certificate-grid">
+            {certificates.map((certificate) => (
+              <a
+                className="certificate-card"
+                href={certificate.image}
+                target="_blank"
+                rel="noreferrer"
+                key={`${certificate.title}-${certificate.image}`}
+              >
+                <div className="certificate-image-wrap">
+                  <Image
+                    className="certificate-image"
+                    src={certificate.image}
+                    alt={`${certificate.title} certificate`}
+                    width={1200}
+                    height={850}
+                  />
+                  <span className="certificate-view">VIEW ↗</span>
+                </div>
+                <div className="certificate-details">
+                  <h3>{certificate.title}</h3>
+                  <span>{certificate.issuer}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="contact-section" id="contact">
         <div className="container contact-layout">
           <div>
-            <span className="section-label">06 — Contact</span>
+            <span className="section-label">07 - Contact</span>
             <p className="contact-intro">I would be glad to connect, learn about your team, and explore how I can contribute as an intern.</p>
             <div className="contact-links">
               <a className="email-link" href="mailto:23011028@student.buksu.edu.ph">23011028@student.buksu.edu.ph <span>↗</span></a>
@@ -308,7 +377,7 @@ export default function Home() {
       </section>
 
       <footer className="footer">
-        <div className="container footer-inner"><a className="brand" href="#home">AD<span>.</span></a><span>ANGELIE MARIE DINAWANAO · 2026</span><a href="#home">BACK TO TOP ↑</a></div>
+        <div className="container footer-inner"><a className="brand" href="#home">AD<span>.</span></a><span>DESIGNED & BUILT WITH CARE · 2026</span><a href="#home">BACK TO TOP ↑</a></div>
       </footer>
     </main>
   );
