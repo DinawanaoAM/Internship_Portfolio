@@ -109,6 +109,33 @@ const interests = [
   ["Product Management", "Understanding user requirements, product planning, feature development, and aligning technical solutions with user needs."],
 ];
 
+const certificates = [
+  {
+    title: "CCNA: Switching, Routing, and Wireless Essentials",
+    image: "/Certificates/CCNA-_Switching-_Routing-_and_Wireless_Essentials_certificate.png",
+  },
+  {
+    title: "Mapúa Certificate",
+    image: "/Certificates/Mapua.png",
+  },
+  {
+    title: "TOPCIT 2026",
+    image: "/Certificates/TOPCIT_2026.png",
+  },
+  {
+    title: "UiTM Certificate",
+    image: "/Certificates/UiTM.png",
+  },
+  {
+    title: "Wadhwani Foundation Certificate",
+    image: "/Certificates/Wadhwani%20Foundation%20Cert.png",
+  },
+  {
+    title: "Wadhwani Foundation Certificate",
+    image: "/Certificates/wadhwani%20foundation.png",
+  },
+];
+
 const leadership = [
   {
     date: "2024–2025",
@@ -158,8 +185,9 @@ export default function Home() {
             <a href="#skills">Focus</a>
             <a href="#journey">Journey</a>
             <a href="#projects">Projects</a>
-            <a href="#achievements">Achievements</a>
-            <ThemeToggle />
+<a href="#achievements">Achievements</a>
+<a href="#certificates">Certificates</a>
+<ThemeToggle />
           </div>
         </nav>
       </header>
@@ -293,10 +321,44 @@ export default function Home() {
         </div>
       </section>
 
+
+            <section className="section certificates-section" id="certificates">
+        <div className="container">
+          <SectionHeading label="06 — Certificates" />
+          <div className="certificate-grid">
+            {certificates.map((certificate, index) => (
+              <article className="featured-project certificate-card" key={certificate.image}>
+                <a
+                  className="featured-project-images certificate-image-wrap"
+                  href={certificate.image}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${certificate.title}`}
+                >
+                  <Image
+                    className="certificate-image"
+                    src={certificate.image}
+                    alt={certificate.title}
+                    width={1200}
+                    height={850}
+                  />
+                </a>
+                <div className="featured-project-info certificate-details">
+                  <span className="project-number certificate-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{certificate.title}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="contact-section" id="contact">
         <div className="container contact-layout">
           <div>
-            <span className="section-label">06 — Contact</span>
+            <span className="section-label">07 — Contact</span>
             <p className="contact-intro">I would be glad to connect, learn about your team, and explore how I can contribute as an intern.</p>
             <div className="contact-links">
               <a className="email-link" href="mailto:23011028@student.buksu.edu.ph">23011028@student.buksu.edu.ph <span>↗</span></a>
